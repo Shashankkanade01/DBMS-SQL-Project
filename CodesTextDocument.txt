@@ -1,0 +1,118 @@
+-- Table: Gamer
+CREATE TABLE Gamer (
+    user_id INT PRIMARY KEY,
+    DOB DATE,
+    Password VARCHAR(255),
+    Name VARCHAR(255) REFERENCES Developer(Name),
+    Manager_id INT,
+    FOREIGN KEY (Manager_id) REFERENCES Project_Manager(Manager_id)
+);
+
+-- Table: Project_Manager
+CREATE TABLE Project_Manager (
+    Manager_id INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Age INT,
+    Hire_date DATE
+);
+
+-- Table: Developer
+CREATE TABLE Developer (
+    Developer_ID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Experience INT,
+    Email VARCHAR(255),
+    Phone_no VARCHAR(20),
+    Manager_id INT,
+    FOREIGN KEY (Manager_id) REFERENCES Project_Manager(Manager_id)
+);
+
+-- Table: Game
+CREATE TABLE Game (
+    Name VARCHAR(255) PRIMARY KEY,
+    Genre VARCHAR(100),
+    Rating DECIMAL(3, 2),
+    Launch_Date DATE,
+    Downloads INT,
+    Company_id INT,
+    FOREIGN KEY (Company_id) REFERENCES Company(Company_id)
+);
+
+-- Table: Company
+CREATE TABLE Company (
+    Company_id INT PRIMARY KEY,
+    Establishment_year INT,
+    Name VARCHAR(255),
+    Number_of_Employees INT,
+    Manager_id INT,
+    FOREIGN KEY (Manager_id) REFERENCES Project_Manager(Manager_id)
+);
+-- Inserting values into the Gamer table
+INSERT INTO Gamer (user_id, DOB, Password, Name, Manager_id) 
+VALUES
+    (1, '1990-05-15', 'password1', 'John', 1),
+    (2, '1988-09-23', 'password2', 'Alice', 1),
+    (3, '1995-02-10', 'password3', 'Bob', 2),
+    (4, '1992-11-30', 'password4', 'Carol', 2),
+    (5, '1997-07-18', 'password5', 'David', 3),
+    (6, '1985-03-20', 'password6', 'Emma', 3),
+    (7, '1993-08-12', 'password7', 'Frank', 4),
+    (8, '1987-04-25', 'password8', 'Grace', 4),
+    (9, '1991-10-05', 'password9', 'Henry', 5),
+    (10, '1989-06-28', 'password10', 'Ivy', 5);
+
+-- Inserting values into the Project_Manager table
+INSERT INTO Project_Manager (Manager_id, Name, Age, Hire_date) 
+VALUES
+    (1, 'Manager1', 35, '2010-01-15'),
+    (2, 'Manager2', 40, '2008-05-20'),
+    (3, 'Manager3', 45, '2005-11-10'),
+    (4, 'Manager4', 38, '2012-09-05'),
+    (5, 'Manager5', 42, '2007-03-25'),
+    (6, 'Manager6', 36, '2009-07-12'),
+    (7, 'Manager7', 41, '2015-04-30'),
+    (8, 'Manager8', 39, '2013-10-18'),
+    (9, 'Manager9', 37, '2011-02-22'),
+    (10, 'Manager10', 43, '2016-08-08');
+
+-- Inserting values into the Developer table
+INSERT INTO Developer (Developer_ID, Name, Experience, Email, Phone_no, Manager_id) 
+VALUES
+    (1, 'Developer1', 5, 'developer1@example.com', '123-456-7890', 1),
+    (2, 'Developer2', 8, 'developer2@example.com', '987-654-3210', 1),
+    (3, 'Developer3', 3, 'developer3@example.com', '111-222-3333', 2),
+    (4, 'Developer4', 6, 'developer4@example.com', '444-555-6666', 2),
+    (5, 'Developer5', 4, 'developer5@example.com', '777-888-9999', 3),
+    (6, 'Developer6', 7, 'developer6@example.com', '555-444-3333', 3),
+    (7, 'Developer7', 2, 'developer7@example.com', '666-777-8888', 4),
+    (8, 'Developer8', 9, 'developer8@example.com', '222-333-4444', 4),
+    (9, 'Developer9', 4, 'developer9@example.com', '999-888-7777', 5),
+    (10, 'Developer10', 6, 'developer10@example.com', '333-222-1111', 5);
+
+-- Inserting values into the Game table
+INSERT INTO Game (Name, Genre, Rating, Launch_Date, Downloads, Company_id) 
+VALUES
+    ('Game1', 'Action', 4.5, '2022-03-10', 1000000, 1),
+    ('Game2', 'Adventure', 4.2, '2021-07-20', 800000, 2),
+    ('Game3', 'Puzzle', 4.0, '2023-01-05', 1200000, 3),
+    ('Game4', 'Strategy', 4.7, '2020-11-15', 1500000, 4),
+    ('Game5', 'Simulation', 4.3, '2024-02-01', 500000, 5),
+    ('Game6', 'Racing', 4.1, '2023-09-18', 900000, 1),
+    ('Game7', 'Role-Playing', 4.6, '2022-05-30', 1100000, 2),
+    ('Game8', 'Sports', 4.4, '2021-12-25', 1300000, 3),
+    ('Game9', 'Fighting', 4.2, '2020-08-08', 700000, 4),
+    ('Game10', 'Simulation', 4.8, '2024-06-15', 1800000, 5);
+
+-- Inserting values into the Company table
+INSERT INTO Company (Company_id, Establishment_year, Name, Number_of_Employees, Manager_id) 
+VALUES
+    (1, 2000, 'Company1', 200, 1),
+    (2, 2005, 'Company2', 150, 2),
+    (3, 2010, 'Company3', 300, 3),
+    (4, 2015, 'Company4', 180, 4),
+    (5, 2018, 'Company5', 250, 5),
+    (6, 2002, 'Company6', 220, 6),
+    (7, 2007, 'Company7', 170, 7),
+    (8, 2012, 'Company8', 280, 8),
+    (9, 2017, 'Company9', 190, 9),
+    (10, 2019, 'Company10', 260, 10);
